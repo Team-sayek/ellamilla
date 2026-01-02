@@ -4,477 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ella Milla | Pure Mineral Water</title>
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: #1a3a3a;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #2c5f5f;
-            font-weight: 400;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #4a9d9d;
-        }
-
-        .cta-button {
-            background: #2c5f5f;
-            color: white !important;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            transition: all 0.3s;
-        }
-
-        .cta-button:hover {
-            background: #1a3a3a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(44, 95, 95, 0.3);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: #2c5f5f;
-            margin: 3px 0;
-            transition: all 0.3s;
-            border-radius: 3px;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .slide.active {
-            opacity: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: white;
-            max-width: 700px;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
-            border-radius: 20px;
-        }
-
-        .hero-content h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .shop-btn {
-            background: white;
-            color: #2c5f5f;
-            border: none;
-            padding: 1rem 2.5rem;
-            font-size: 1rem;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .shop-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .dot.active {
-            background: white;
-            width: 30px;
-            border-radius: 5px;
-        }
-
-        .products {
-            padding: 5rem 5%;
-            background: #f8fafa;
-        }
-
-        .products h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #1a3a3a;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .product-img-placeholder {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #e0f2f1, #b2dfdb);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #2c5f5f;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #1a3a3a;
-        }
-
-        .product-card p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .product-card span {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2c5f5f;
-        }
-
-        .footer {
-            background: #1a3a3a;
-            color: #e0f2f1;
-            padding: 4rem 5% 2rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 0 auto 3rem;
-        }
-
-        .footer-section h3.footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        .footer-tagline {
-            color: #b2dfdb;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .footer-section h4 {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section ul li a {
-            color: #b2dfdb;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .footer-section ul li a:hover {
-            color: #4db6ac;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #b2dfdb;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: #4db6ac;
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .newsletter-text {
-            color: #b2dfdb;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .newsletter-form input {
-            padding: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: #4db6ac;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .newsletter-form input::placeholder {
-            color: #80cbc4;
-        }
-
-        .newsletter-form button {
-            padding: 0.9rem;
-            background: #4db6ac;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .newsletter-form button:hover {
-            background: #26a69a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(77, 182, 172, 0.3);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-bottom p {
-            color: #80cbc4;
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            color: #80cbc4;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: #4db6ac;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                right: -100%;
-                top: 0;
-                flex-direction: column;
-                background: rgba(255, 255, 255, 0.98);
-                width: 70%;
-                height: 100vh;
-                padding-top: 5rem;
-                transition: right 0.3s ease-in-out;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-        }
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -487,8 +22,8 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#about">The Source</a></li>
-            <li><a href="#shop">Shop</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#shop">Collection</a></li>
             <li><a href="#" class="cta-button">Order Now</a></li>
         </ul>
     </nav>
@@ -503,7 +38,9 @@
         <div class="hero-content">
             <h1>Purity in Every Drop.</h1>
             <p>Experience the crisp, mineral-rich taste of Ella Milla—responsibly sourced and bottled in glass.</p>
-            <button class="shop-btn" onclick="document.querySelector('#shop').scrollIntoView({behavior: 'smooth'})">Explore the Collection</button>
+            <button class="shop-btn" onclick="document.querySelector('#shop').scrollIntoView({behavior: 'smooth'})">
+                Explore the Collection
+            </button>
         </div>
 
         <div class="slider-dots">
@@ -513,23 +50,32 @@
         </div>
     </section>
 
-    <section id="shop" class="products">
-        <h2>Our Collection</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-img-placeholder">Still</div>
-                <h3>Still Water</h3>
-                <p>750ml Glass Bottle</p>
-                <span>$4.00</span>
+   <section id="shop" class="products">
+    <h2>Our Collection</h2>
+
+    <div class="product-grid">
+
+        <div class="product-card">
+            <div class="product-img-placeholder">
+                <img src="img/unnamed.jpg" alt="Still Water">
             </div>
-            <div class="product-card">
-                <div class="product-img-placeholder">Sparkling</div>
-                <h3>Sparkling Water</h3>
-                <p>750ml Glass Bottle</p>
-                <span>$4.50</span>
-            </div>
+            <h3>Still Water</h3>
+            <p>750ml Glass Bottle</p>
+            <span>$4.00</span>
         </div>
-    </section>
+
+        <div class="product-card">
+            <div class="product-img-placeholder">
+                <img src="img/sparkling-water.jpg" alt="Sparkling Water">
+            </div>
+            <h3>Sparkling Water</h3>
+            <p>750ml Glass Bottle</p>   
+            <span>$4.50</span>
+        </div>
+
+    </div>
+</section>
+
 
     <footer class="footer">
         <div class="footer-content">
@@ -537,53 +83,38 @@
                 <h3 class="footer-logo">ELLA MILLA</h3>
                 <p class="footer-tagline">Purity in every drop since 2025</p>
                 <div class="social-links">
-                    <a href="#" aria-label="Instagram">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                    </a>
-                    <a href="#" aria-label="Facebook">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
-                    </a>
-                    <a href="#" aria-label="Twitter">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                        </svg>
-                    </a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
                 </div>
             </div>
 
             <div class="footer-section">
                 <h4>Shop</h4>
                 <ul>
-                    <li><a href="#shop">Still Water</a></li>
-                    <li><a href="#shop">Sparkling Water</a></li>
-                    <li><a href="#">Subscription Plans</a></li>
-                    <li><a href="#">Gift Sets</a></li>
+                    <li><a href="500ml-set.html">500ml(SET)</a></li>
+                    <li><a href="1liter-set.html">1liter(SET)</a></li>
+                    <li><a href="gift-sets.html">Gift Sets</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="#about">Our Story</a></li>
-                    <li><a href="#">Sustainability</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
+                    <li><a href="our-story.html">Our Story</a></li>
+                    <li><a href="sustainability.html">Sustainability</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="subscription-plans.html">Subscription Plans</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Shipping Info</a></li>
-                    <li><a href="#">Returns</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="shipping-info.html">Shipping Info</a></li>
+                    <li><a href="returns.html">Returns</a></li>
                 </ul>
             </div>
 
@@ -600,55 +131,14 @@
         <div class="footer-bottom">
             <p>&copy; 2025 Ella Milla. All rights reserved.</p>
             <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Cookie Policy</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Hamburger Menu
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const links = document.querySelectorAll('.nav-links a');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Slider
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-        }
-
-        function nextSlide() {
-            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-            showSlide(currentSlideIndex);
-        }
-
-        function currentSlide(index) {
-            currentSlideIndex = index;
-            showSlide(index);
-        }
-
-        setInterval(nextSlide, 5000);
-    </script>
+    <!-- JS -->
+    <script src="script.js"></script>
 </body>
 </html>
